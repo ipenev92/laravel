@@ -5,6 +5,41 @@
 @endsection
 
 @section('table')
+    @component('admin.components.modal-filter')
+        <form>
+            <div class="form-row">
+                <div class="form-element">
+                    <div class="form-element-label">
+                        <label for="name">Event</label>
+                    </div>
+                    <div class="form-element-input">
+                        <input type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-element">
+                    <div class="form-element-label">
+                        <label for="date">Date</label>
+                    </div>
+                    <div class="form-element-input">
+                        <input type="date">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-element">
+                    <div class="form-element-label">
+                        <label for="time">Time</label>
+                    </div>
+                    <div class="form-element-input">
+                        <input type="time">
+                    </div>
+                </div>
+            </div>
+        </form>
+    @endcomponent
+
     <section class="table">
         <article class="table-record">
             <div class="table-buttons">
@@ -173,4 +208,3 @@
         </div>
     </form>
 @endsection
-    

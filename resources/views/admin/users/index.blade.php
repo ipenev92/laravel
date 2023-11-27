@@ -5,6 +5,10 @@
 @endsection
 
 @section('table')
+    @component('admin.components.modal-filter')
+
+    @endcomponent
+
     <section class="table">
         <article class="table-record">
             <div class="table-buttons">
@@ -153,4 +157,3 @@
         </div>
     </form>
 @endsection
-    
