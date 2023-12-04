@@ -1,4 +1,8 @@
-.table {
+.table{
+    flex: 1;
+}
+
+.table-records {
     display: flex;
     flex: 1;
     flex-direction: column;
@@ -35,3 +39,15 @@
     content: ":";
     margin-right: 0.5rem;
 }
+
+.table-pagination{
+    background-color: hsl(0, 0%, 100%);
+    padding: 1rem 0;
+    width: 100%;
+}
+
+.table-pagination span {
+    color: hsl(0, 0%, 0%);
+    font-weight: 700;
+}
+

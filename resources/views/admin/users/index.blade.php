@@ -9,7 +9,7 @@
 
     @endcomponent
 
-    <section class="table">
+    <section class="table-records">
         <article class="table-record">
             <div class="table-buttons">
                 <div class="edit-button">
@@ -106,6 +106,11 @@
                 </ul>
             </div>
         </article>
+
+        <div class="table-pagination">
+            <span>{{trans_choice('admin/pagination.total',  5, ['count' => 5] )}}</span>
+        </div>
+
     </section>
 @endsection
 

@@ -384,3 +384,33 @@ html {
   video {
     max-width: 100%;
   }
+
+  * {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+a {
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -o-transition: 300ms;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 300ms;
+}
+
+a:hover, a:focus {
+    outline: none;
+    text-decoration: none;
+    outline-offset: 0;
+}
+
+ul {
+    list-style: none;
+}
