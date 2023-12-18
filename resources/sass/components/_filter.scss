@@ -2,9 +2,48 @@
     align-items: center;
     background-color: hsl(0, 0%, 100%);
     display: flex;
+    margin-bottom: 1rem;
     justify-content: center;
-    margin-bottom: 2rem;
-    padding: 0.2rem 0;
+    overflow: hidden;
+    min-height: 2rem;
+    max-height: 0rem;
+    padding: 0.2rem 0.5rem;
+    transition: 0.3s;
+}
+
+.filter.active{
+    max-height: 6rem;
+}
+
+.filter-button{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+}
+
+
+.filter-form{
+    display:flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+
+.filter-element {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 0.3rem;
+    padding-bottom: 1rem;
+}
+
+.filter-element label {
+    color: black;
+}
+
+.filter.active{
+    height: 50vh;
 }
 
 .filter-button button svg {

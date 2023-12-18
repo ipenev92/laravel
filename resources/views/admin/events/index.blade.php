@@ -5,39 +5,49 @@
 @endsection
 
 @section('table')
-    @component('admin.components.modal-filter')
-        <form>
-            <div class="form-row">
-                <div class="form-element">
-                    <div class="form-element-label">
-                        <label for="name">Event</label>
-                    </div>
-                    <div class="form-element-input">
-                        <input type="text">
-                    </div>
-                </div>
+    @component ('admin.components.table-filter')
+    @endcomponent
+
+    @component('admin.components.filter-modal')
+        <div class="content-title">
+            <h3>Table Filter</h3>
+        </div>
+        <div class="content-text">
+            <label for="title">Title</label>
+            <input type="text">
+        </div>
+        <div class="content-text">
+            <label for="date">Date</label>
+            <input type="date">
+        </div>
+        <div class="content-text">
+            <label for="time">Time</label>
+            <input type="time">
+        </div>
+        <div class="content-buttons">
+            <button class="content-buttons-accept">
+                <h3>Apply</h3>
+            </button>
+            <button class="content-buttons-deny">
+                <h3>Cancel</h3>
+            </button>
+        </div>
+    @endcomponent
+
+    @component('admin.components.delete-modal')
+        <div class="delete-modal-content">
+            <div class="content-title">
+                <h3>Confirm Deletion</h3>
             </div>
-            <div class="form-row">
-                <div class="form-element">
-                    <div class="form-element-label">
-                        <label for="date">Date</label>
-                    </div>
-                    <div class="form-element-input">
-                        <input type="date">
-                    </div>
-                </div>
+            <div class="content-buttons">
+                <button class="content-buttons-accept">
+                    <h3>Confirm</h3>
+                </button>
+                <button class="content-buttons-deny">
+                    <h3>Cancel</h3>
+                </button>
             </div>
-            <div class="form-row">
-                <div class="form-element">
-                    <div class="form-element-label">
-                        <label for="time">Time</label>
-                    </div>
-                    <div class="form-element-input">
-                        <input type="time">
-                    </div>
-                </div>
-            </div>
-        </form>
+        </div>
     @endcomponent
 
     <section class="table-records">

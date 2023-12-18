@@ -1,19 +1,9 @@
 h1, h2, h3, h4, h5, h6 {
     color: hsl(0, 0%, 100%);
-}
-
-input, label, select, textarea, li, span, p  {
-    color: hsl(0, 0%, 100%); 
-}
-
-h1, h2, h3, h4 {
     font-family: $font-stack;
 }
-
-h5, h6 {
-    font-family: $font-stack-condensed;
-}
-
-a, td, th, p, button, span, label, select, input, textarea, li {
+  
+input, label, select, textarea, li, span, p, button {
+    color: hsl(0, 0%, 100%);
     font-family: $font-stack;
 }

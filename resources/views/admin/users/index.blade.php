@@ -5,8 +5,45 @@
 @endsection
 
 @section('table')
-    @component('admin.components.modal-filter')
+    @component ('admin.components.table-filter')
+    @endcomponent
 
+    @component('admin.components.filter-modal')
+        <div class="content-title">
+            <h3>Table Filter</h3>
+        </div>
+        <div class="content-text">
+            <label for="name">Name</label>
+            <input type="text">
+        </div>
+        <div class="content-text">
+            <label for="name">E-mail</label>
+            <input type="text">
+        </div>
+        <div class="content-buttons">
+            <button class="content-buttons-accept">
+                <h3>Apply</h3>
+            </button>
+            <button class="content-buttons-deny">
+                <h3>Cancel</h3>
+            </button>
+        </div>
+    @endcomponent
+
+    @component('admin.components.delete-modal')
+        <div class="delete-modal-content">
+            <div class="content-title">
+                <h3>Confirm Deletion</h3>
+            </div>
+            <div class="content-buttons">
+                <button class="content-buttons-accept">
+                    <h3>Confirm</h3>
+                </button>
+                <button class="content-buttons-deny">
+                    <h3>Cancel</h3>
+                </button>
+            </div>
+        </div>
     @endcomponent
 
     <section class="table-records">
@@ -108,8 +145,8 @@
         </article>
 
         <div class="table-pagination">
-            <span>{{trans_choice('admin/pagination.total',  5, ['count' => 5] )}}</span>
-        </div>
+            <span>{{trans_choice("admin/pagination.total", 1 , ["count" => 1])}}</span>
+          </div>
 
     </section>
 @endsection
@@ -130,7 +167,7 @@
     <form>
         <div class="form-element">
             <div class="form-element-label">
-                <label for="name">Nombre</label>
+                <label for="name">Name</label>
             </div>
             <div class="form-element-input">
                 <input type="text">
@@ -146,7 +183,7 @@
         </div>
         <div class="form-element">
             <div class="form-element-label">
-                <label for="password">Contraseña</label>
+                <label for="password">Password</label>
             </div>
             <div class="form-element-input">
                 <input type="password">
@@ -154,7 +191,7 @@
         </div>
         <div class="form-element">
             <div class="form-element-label">
-                <label for="confirmar-password">Repetir contraseña</label>
+                <label for="confirmar-password">Repeat Password</label>
             </div>
             <div class="form-element-input">
                 <input type="password">
