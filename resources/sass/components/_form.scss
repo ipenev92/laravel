@@ -5,28 +5,30 @@
 .form-buttons {
     background-color: hsl(0, 0%, 100%);
     display: flex;
-    justify-content: flex-end;
     gap: 0.5rem;
+    justify-content: flex-end;
     margin-bottom: 1rem;
     padding-right: 0.5rem;
 }
 
-.form-clean-button button svg, .form-save-button button svg {
+.create-button button svg,
+.store-button button svg {
     width: 2rem;
 }
 
-.form-clean-button button svg path, .form-save-button button svg path {
+.create-button button svg path,
+.store-button button svg path {
     fill: $secondary-color;
 }
 
-.form-clean-button button:hover svg path, .form-save-button button:hover svg path {
+.create-button button:hover svg path,
+.store-button button:hover svg path {
     fill: $hover-color;
 }
 
-form {
+.form-row {
     display: flex;
-    flex-wrap: wrap;
-    gap: 2%;
+    gap: 2rem;
 }
 
 .form-element {
@@ -45,13 +47,33 @@ form {
     width: 100%;
 }
 
+.form-element-label label {
+    font-weight: 700;
+}
+
 .form-element-input * {
     background-color: $tertiary-color;
     border: none;
     box-sizing: border-box;
     font-size: 1rem;
+    height: 2rem;
     outline: transparent;
     padding: 0.5rem;
     width: 100%;
+}
+
+.form-element-input input[type="number"]::-webkit-outer-spin-button,
+.form-element-input input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.form-element-input input[type="date"]::-webkit-calendar-picker-indicator,
+.form-element-input input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+.form-element-input textarea {
+    height: 10vh;
     resize: none;
 }

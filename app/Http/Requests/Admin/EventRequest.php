@@ -31,7 +31,7 @@ class EventRequest extends FormRequest
         'startDate' => 'required|date',
         'endDate' => 'required|date|after_or_equal:startDate',
         'startTime' => 'required|date_format:H:i',
-        'endTime' => 'required|date_format:H:i|after:startTime',
+        'endTime' => 'required|date_format:H:i|after_or_equal:startTime',
       ];
     }
 

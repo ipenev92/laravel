@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -11,5 +10,24 @@ class Event extends Model {
     use SoftDeletes;
 
     protected $guarded = [];
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at'];  
+
+    protected $fillable = [
+        'title',
+        'location',
+        'price',
+        'date',
+        'time',
+        'description'
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
+    ];
 }

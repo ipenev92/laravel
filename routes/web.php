@@ -2,10 +2,27 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/admin/users', function () {
-    return view('admin.users.index');
+Route::group(['prefix' => 'admin'], function () {
+
+  Route::resource('users', 'App\Http\Controllers\Admin\UserController', [
+    'names' => [
+    'index' => 'users',
+    'create' => 'users_create',
+    'edit' => 'users_edit',
+    'store' => 'users_store',
+    'destroy' => 'users_destroy',
+    ]
+  ]);
+
+  Route::resource('events', 'App\Http\Controllers\Admin\EventController', [
+    'names' => [
+    'index' => 'events',
+    'create' => 'events_create',
+    'edit' => 'events_edit',
+    'store' => 'events_store',
+    'destroy' => 'events_destroy',
+    ]
+  ]);
 });
 
-Route::get('/admin/events', function () {
-    return view('admin.events.index');
-});
+//require _DIR_.'/auth.php';
