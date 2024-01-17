@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Http\ViewComposers\Admin;
+
+use Illuminate\View\View;
+use App\Models\Town as DBTown;
+
+class Town {
+  static $composed;
+
+  public function __construct(private DBTown $towns) {}
+
+  public function compose(View $view)
+  {
+    if(static::$composed)
+    {
+      return $view->with('towns', static::$composed);
+    }
+
+    static::$composed = $this->towns->orderBy('name', 'asc')->get();
+
+    $view->with('towns', static::$composed);
+  }
+}

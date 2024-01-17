@@ -54,28 +54,38 @@
   
   <div class="table-records">
     @foreach($events as $event_element)
-      <article class="table-record">
-            <div class="table-buttons">
-                <div class="edit-button">
+        <article class="table-record">
+            <div class="table-record-buttons">
+                <div class="edit-button" data-endpoint="{{route('events_edit', ["event" => $event_element->id])}}">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                             <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
                         </svg>
                     </button>
                 </div>
-                <div class="delete-button">
+                <div class="destroy-button"  data-endpoint="{{route('events_destroy', ["event" => $event_element->id])}}">
                     <button>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
+                          <path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
                         </svg>
                     </button>
                 </div>
             </div>
             <div class="table-data">
                 <ul>
-                    <li><span>Titulo</span>{{$event_elemetn->title}}</li>
-                    <li><span>Fecha</span>{{$event_elemetn->date}}</li>
-                    <li><span>Hora</span>{{$event_elemetn->time}}</li>
+                    <li><span>Name</span>{{$event_element->name}}</li>
+                    <li><span>Address</span>{{$event_element->address}}</li>
+                    <li>
+                        <span>Poblacion</span>
+                        @foreach ($towns as $town)
+                            @if ($town->id == $event_element->town_id)
+                                {{$town->name}}
+                            @endif
+                        @endforeach                    
+                    </li>
+                    <li><span>Price</span>{{$event_element->price}}</li>
+                    <li><span>Date</span>{{$event_element->start_date }} to {{$event_element->end_date}}</li>
+                    <li><span>Time</span>{{$event_element->start_time }} to {{$event_element->end_time}}</li>
                 </ul>
             </div>
         </article>
@@ -105,51 +115,94 @@
     <form class="admin-form">
         <div class="form-element-wide">
             <div class="form-element-label">
-                <label for="title">Title</label>
+                <label for="name">Name</label>
             </div>
             <div class="form-element-input">
-                <input type="text">
+                <input type="text" name="name" value="{{$event->name ?? ''}}">
             </div>
         </div>
-        <div class="form-element">
-            <div class="form-element-label">
-                <label for="location">Location</label>
+        <div class="form-row">
+            <div class="form-element">
+                <div class="form-element-label">
+                    <label for="address">Address</label>
+                </div>
+                <div class="form-element-input">
+                    <input type="text" name="address" value="{{$event->address ?? ''}}">
+                </div>
             </div>
-            <div class="form-element-input">
-                <input type="text">
+
+            <div class="form-element">
+                <div class="form-element-label">
+                    <label for="address">Poblation</label>
+                </div>
+                <div class="form-element-input">
+                    <select id="town_id" name="town_id">
+                        <option value=""></option>
+                        @foreach ($towns as $town)
+                            <option value="{{$town->id}}" {{ $town->id == $event->town_id ? 'selected' : ''}}>{{$town->name}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-element">
+                <div class="form-element-label">
+                    <label for="price">Price</label>
+                </div>
+                <div class="form-element-input">
+                    <input type="text" name="price" value="{{$event->price ?? ''}}">
+                </div>
             </div>
         </div>
-        <div class="form-element">
-            <div class="form-element-label">
-                <label for="price">Price</label>
+
+        <div class="form-row">
+            <div class="form-element">
+              <div class="form-element-label">
+                <label for="start_date">Start Date</label>
+              </div>
+              <div class="form-element-input">
+                <input type="date" name="start_date" value="{{$event->start_date ?? ''}}">
+              </div>
             </div>
-            <div class="form-element-input">
-                <input type="number">
+            <div class="form-element">
+              <div class="form-element-label">
+                <label for="end_date">End Date</label>
+              </div>
+              <div class="form-element-input">
+                <input type="date" name="end_date" value="{{$event->end_date ?? ''}}">
+              </div>
             </div>
-        </div>
-        <div class="form-element">
-            <div class="form-element-label">
-                <label for="date">Date</label>
+          </div>
+        <div class="form-row">
+            <div class="form-element">
+              <div class="form-element-label">
+                <label for="start_time">Start Time</label>
+              </div>
+              <div class="form-element-input">
+                <input type="time" name="start_time" value="{{$event->start_time ?? ''}}">
+              </div>
             </div>
-            <div class="form-element-input">
-                <input type="date">
+            <div class="form-element">
+              <div class="form-element-label">
+                <label for="end_time">End Time</label>
+              </div>
+              <div class="form-element-input">
+                <input type="time" name="end_time" value="{{$event->end_time ?? ''}}">
+              </div>
             </div>
-        </div>
-        <div class="form-element">
-            <div class="form-element-label">
-                <label for="time">Time</label>
-            </div>
-            <div class="form-element-input">
-                <input type="time">
-            </div>
-        </div>
-        <div class="form-element-wide">
+          </div>
+        <!--<div class="form-element-wide">
             <div class="form-element-label">
                 <label for="description">Description</label>
             </div>
             <div class="form-element-input">
                 <textarea id="textarea" name="description"></textarea>
             </div>
-        </div>
+        </div>-->
+
+
+        @foreach ($languages as $language)
+            <h1>{{$language->name}}</h1>
+        @endforeach
     </form>
 @endsection

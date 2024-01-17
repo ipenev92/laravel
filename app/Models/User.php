@@ -14,13 +14,6 @@ class User extends Authenticatable {
     protected $guarded = [];
     protected $dates = ['deleted_at'];  
 
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
-
-
     protected $hidden = [
         'password',
         'remember_token',

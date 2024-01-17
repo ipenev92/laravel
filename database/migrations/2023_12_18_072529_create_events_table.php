@@ -9,16 +9,16 @@ return new class extends Migration {
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->integer('town_id')->unsigned()->index()->nullable();
             $table->string('name');
             $table->string('address')->default("Evento online");
             $table->decimal('price', 8, 2)->default(0);
-            $table->date('startDate');
-            $table->date('endDate');
-            $table->time('startTime');
-            $table->time('endTime');
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
             $table->softDeletes();
-            
         });
     }
 

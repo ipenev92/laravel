@@ -8,8 +8,6 @@ use App\Models\Event;
 use App\Http\Requests\Admin\EventRequest;
 use Debugbar;
 
-//Debugbar::info($e->getMessage())
-
 class EventController extends Controller
 {
   public function __construct(private Event $event){}
@@ -75,12 +73,6 @@ class EventController extends Controller
 
       $data = $request->validated();
 
-      unset($data['password_confirmation']);
-      
-      if (!$request->filled('password') && $request->filled('id')){
-        unset($data['password']);
-      }
-  
       $this->event->updateOrCreate([
         'id' => $request->input('id')
       ], $data);
@@ -108,7 +100,7 @@ class EventController extends Controller
     }
     catch(\Exception $e){
       return response()->json([
-        'message' => $e->getMessage(),
+        'message' => Debugbar::info($e->getMessage())
       ], 500);
     }
   }
