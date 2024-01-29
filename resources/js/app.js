@@ -1,6 +1,7 @@
 import './form.js'
 import './menu.js'
 import './modal-destroy.js'
+import './tabs.js'
 import './table-filter.js'
 import './table.js'
 import './windows.js'

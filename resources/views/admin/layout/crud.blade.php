@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="crud">
-        <div class="table">
+        <section class="table">
             @yield('table')
-        </div>
+        </section>
 
-        <div class="form">
+        <section class="form">
            @yield('form')
-        </div>
+        </section>
     </div>
 @endsection

@@ -4,27 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
-use App\Models\Event;
-use App\Http\Requests\Admin\EventRequest;
-use App\Services\LocaleService\LocaleService;
+use App\Models\BusinessProfile;
+use App\Http\Requests\Admin\BusinessProfileRequest;
 use Debugbar;
 
-class EventController extends Controller
+class BusinessProfileController extends Controller
 {
-  public function __construct(private Event $event, private LocaleService $localeService) {
-	$this->localeService->setEntity('events');
-  }
+  public function __construct(private BusinessProfile $businessProfile){}
   
-  public function index() {
+  public function index()
+  {
     try{
 
-      $events = $this->event
+      $businessProfiles = $this->businessProfile
         ->orderBy('created_at', 'desc')
         ->paginate(10);
 
-      $view = View::make('admin.events.index')
-      ->with('event', $this->event)
-      ->with('events', $events);
+      $view = View::make('admin.businessProfiles.index')
+      ->with('businessProfile', $this->businessProfile)
+      ->with('businessProfiles', $businessProfiles);
 
       if(request()->ajax()) {
           
@@ -49,13 +47,8 @@ class EventController extends Controller
   {
     try {
 
-      $events = $this->event
-      ->orderBy('created_at', 'desc')
-      ->paginate(10);
-
-      $view = View::make('admin.events.index')
-        ->with('events', $events)
-        ->with('event', $this->event)
+      $view = View::make('admin.businessProfiles.index')
+        ->with('businessProfile', $this->businessProfile)
         ->renderSections();
 
       return response()->json([
@@ -69,17 +62,17 @@ class EventController extends Controller
     }
   }
 
-  public function store(EventRequest $request)
+  public function store(BusinessProfileRequest $request)
   {            
     try{
 
       $data = $request->validated();
-
-      $this->event->updateOrCreate([
+  
+      $this->businessProfile->updateOrCreate([
         'id' => $request->input('id')
       ], $data);
 
-      $events = $this->event
+      $businessProfiles = $this->businessProfile
       ->orderBy('created_at', 'desc')
       ->paginate(10);
 
@@ -89,9 +82,9 @@ class EventController extends Controller
         $message = \Lang::get('admin/notification.create');
       }
 
-      $view = View::make('admin.events.index')
-        ->with('events', $events)
-        ->with('event', $this->event)
+      $view = View::make('admin.businessProfiles.index')
+        ->with('businessProfiles', $businessProfiles)
+        ->with('businessProfile', $this->businessProfile)
         ->renderSections();        
 
       return response()->json([
@@ -102,26 +95,17 @@ class EventController extends Controller
     }
     catch(\Exception $e){
       return response()->json([
-        'message' => Debugbar::info($e->getMessage())
+        'message' => $e->getMessage(),
       ], 500);
     }
-
-	if(request('locale')){
-		$locale = $this->localeService->store(request('locale'), $event->id);
-	}
   }
 
-  public function edit(Event $event)
+  public function edit(BusinessProfile $businessProfile)
   {
     try{
 
-      $events = $this->event
-      ->orderBy('created_at', 'desc')
-      ->paginate(10);
-
-      $view = View::make('admin.events.index')
-      ->with('events', $events)
-      ->with('event', $event); 
+      $view = View::make('admin.businessProfiles.index')
+      ->with('businessProfile', $businessProfile); 
 
       if(request()->ajax()) {
 
@@ -141,20 +125,20 @@ class EventController extends Controller
     }
   }
 
-  public function destroy(Event $event)
+  public function destroy(BusinessProfile $businessProfile)
   {
     try{
-      $event->delete();
+      $businessProfile->delete();
 
-      $events = $this->event
+      $businessProfiles = $this->businessProfile
       ->orderBy('created_at', 'desc')
       ->paginate(10);
 
       $message = \Lang::get('admin/notification.destroy');
       
-      $view = View::make('admin.events.index')
-        ->with('event', $this->event)
-        ->with('events', $events)
+      $view = View::make('admin.businessProfiles.index')
+        ->with('businessProfile', $this->businessProfile)
+        ->with('businessProfiles', $businessProfiles)
         ->renderSections();
       
       return response()->json([

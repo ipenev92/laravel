@@ -4,27 +4,25 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\View;
 use App\Http\Controllers\Controller;
-use App\Models\Event;
-use App\Http\Requests\Admin\EventRequest;
-use App\Services\LocaleService\LocaleService;
+use App\Models\Language;
+use App\Http\Requests\Admin\LanguageRequest;
 use Debugbar;
 
-class EventController extends Controller
+class LanguageController extends Controller
 {
-  public function __construct(private Event $event, private LocaleService $localeService) {
-	$this->localeService->setEntity('events');
-  }
+  public function __construct(private Language $language){}
   
-  public function index() {
+  public function index()
+  {
     try{
 
-      $events = $this->event
+      $languages = $this->language
         ->orderBy('created_at', 'desc')
         ->paginate(10);
 
-      $view = View::make('admin.events.index')
-      ->with('event', $this->event)
-      ->with('events', $events);
+      $view = View::make('admin.languages.index')
+      ->with('language', $this->language)
+      ->with('languages', $languages);
 
       if(request()->ajax()) {
           
@@ -49,13 +47,8 @@ class EventController extends Controller
   {
     try {
 
-      $events = $this->event
-      ->orderBy('created_at', 'desc')
-      ->paginate(10);
-
-      $view = View::make('admin.events.index')
-        ->with('events', $events)
-        ->with('event', $this->event)
+      $view = View::make('admin.languages.index')
+        ->with('language', $this->language)
         ->renderSections();
 
       return response()->json([
@@ -69,17 +62,17 @@ class EventController extends Controller
     }
   }
 
-  public function store(EventRequest $request)
+  public function store(LanguageRequest $request)
   {            
     try{
 
       $data = $request->validated();
-
-      $this->event->updateOrCreate([
+  
+      $this->language->updateOrCreate([
         'id' => $request->input('id')
       ], $data);
 
-      $events = $this->event
+      $languages = $this->language
       ->orderBy('created_at', 'desc')
       ->paginate(10);
 
@@ -89,9 +82,9 @@ class EventController extends Controller
         $message = \Lang::get('admin/notification.create');
       }
 
-      $view = View::make('admin.events.index')
-        ->with('events', $events)
-        ->with('event', $this->event)
+      $view = View::make('admin.languages.index')
+        ->with('languages', $languages)
+        ->with('language', $this->language)
         ->renderSections();        
 
       return response()->json([
@@ -102,26 +95,17 @@ class EventController extends Controller
     }
     catch(\Exception $e){
       return response()->json([
-        'message' => Debugbar::info($e->getMessage())
+        'message' => $e->getMessage(),
       ], 500);
     }
-
-	if(request('locale')){
-		$locale = $this->localeService->store(request('locale'), $event->id);
-	}
   }
 
-  public function edit(Event $event)
+  public function edit(Language $language)
   {
     try{
 
-      $events = $this->event
-      ->orderBy('created_at', 'desc')
-      ->paginate(10);
-
-      $view = View::make('admin.events.index')
-      ->with('events', $events)
-      ->with('event', $event); 
+      $view = View::make('admin.languages.index')
+      ->with('language', $language); 
 
       if(request()->ajax()) {
 
@@ -141,20 +125,20 @@ class EventController extends Controller
     }
   }
 
-  public function destroy(Event $event)
+  public function destroy(Language $language)
   {
     try{
-      $event->delete();
+      $language->delete();
 
-      $events = $this->event
+      $languages = $this->language
       ->orderBy('created_at', 'desc')
       ->paginate(10);
 
       $message = \Lang::get('admin/notification.destroy');
       
-      $view = View::make('admin.events.index')
-        ->with('event', $this->event)
-        ->with('events', $events)
+      $view = View::make('admin.languages.index')
+        ->with('language', $this->language)
+        ->with('languages', $languages)
         ->renderSections();
       
       return response()->json([
