@@ -12,7 +12,9 @@ class HomeController extends Controller {
 
     public function index() {
         try {
-            $events = $this->event->with('town');
+            $events = $this->event->with('town')->with('translations')->get();
+
+            Debugbar::info($events);
 
             return $view = View::make('front.home.index')
             ->with('events', $events);

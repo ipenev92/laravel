@@ -209,7 +209,7 @@
                                 <label for="title-{{$language->label}}">Título</label>
                             </div>
                             <div class="form-element-input">
-                                <input type="text" name="locale['title.{{$language->label}}']" value="{{$event['title.'.$language->label] ?? ''}}">
+                                <input type="text" name="locale[title.{{$language->label}}]" value="{{$event['title.'.$language->label] ?? ''}}">
                             </div>
                         </div>
                     </div>
@@ -219,7 +219,7 @@
                                 <label for="description-{{$language->label}}">Descripción</label>
                             </div>
                             <div class="form-element-input">
-                                <textarea name="locale['description.{{$language->label}}']">{{$event['description.'.$language->label] ?? ''}}</textarea>
+                                <textarea name="locale[description.{{$language->label}}]">{{$event['description.'.$language->label] ?? ''}}</textarea>
                             </div>
                         </div>
                     </div>

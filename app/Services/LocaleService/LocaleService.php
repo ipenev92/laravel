@@ -63,7 +63,7 @@ class LocaleService
     return Locale::getValues($this->entity, $entity_id)->pluck('value','key')->all();   
   }
 
-  public function delete($key)
+  public function delete($entity_id)
   {
     if (Locale::getValues($this->entity, $entity_id)->count() > 0) {
       Locale::getValues($this->entity, $entity_id)->delete();   

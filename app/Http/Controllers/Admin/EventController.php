@@ -117,11 +117,11 @@ class EventController extends Controller
   {
     try{
 
-      // $event = $this->localeService->parseLocales($event);
-
       $events = $this->event
       ->orderBy('created_at', 'desc')
       ->paginate(10);
+
+      $event = $this->localeService->parseLocales($event);
 
       $view = View::make('admin.events.index')
       ->with('events', $events)
@@ -154,6 +154,8 @@ class EventController extends Controller
       $events = $this->event
       ->orderBy('created_at', 'desc')
       ->paginate(10);
+
+      $this->localeService->delete($event->id);
 
       $message = \Lang::get('admin/notification.destroy');
       

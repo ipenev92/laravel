@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::resource('users', 'App\Http\Controllers\Admin\UserController', [
       'names' => [
         'index' => 'users',
