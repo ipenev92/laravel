@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="shortcut icon" href="https://www.youtube.com/s/desktop/12d6b690/img/favicon.ico">
-    <meta name="csrf-token" content="{{csrf_token()}}">
 
     <title>@yield('title')</title>
 
@@ -15,13 +14,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-    @vite(['resources/sass/app-admin.scss', 'resources/js/app-admin.js'])
+    @vite(['resources/sass/app-auth.scss'])
 </head>
 
 <body>
-    @include('admin.layout.partials.header')
-    @include('admin.components.modal-destroy')
-    
     <main>
         @yield('content')
     </main>

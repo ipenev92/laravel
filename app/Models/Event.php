@@ -11,4 +11,15 @@ class Event extends Model {
 
     protected $guarded = [];
     protected $dates = ['deleted_at'];  
+
+
+    public function town()
+  {
+    return $this->belongsTo(Town::class);
+  }
+
+  public function locales()
+  {
+    return $this->hasMany(Locale::class, 'entity_id')->where('entity', 'events');
+  }
 }

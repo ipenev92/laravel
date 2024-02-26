@@ -5,6 +5,9 @@
 @import "base/normalize";
 @import "base/typography";
 
+@import "layout/header";
+@import "layout/master";
+
 @import "components/filter";
 @import "components/form";
 @import "components/menu";
@@ -12,6 +15,3 @@
 @import "components/table_filter";
 @import "components/table-pagination";
 @import "components/table";
-
-@import "layout/header";
-@import "layout/master";

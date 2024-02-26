@@ -15,13 +15,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-    @vite(['resources/sass/app-admin.scss', 'resources/js/app-admin.js'])
+    @vite(['resources/sass/app-front.scss', 'resources/js/app-front.js'])
 </head>
 
 <body>
-    @include('admin.layout.partials.header')
-    @include('admin.components.modal-destroy')
-    
     <main>
         @yield('content')
     </main>

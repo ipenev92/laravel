@@ -75,15 +75,8 @@
                 <div class="table-data">
                     <ul>
                         <li><span>Name</span>{{$event_element->name}}</li>
+                        <li><span>Poblacion</span>{{$event_element->town->name}}</li>
                         <li><span>Address</span>{{$event_element->address}}</li>
-                        <li>
-                            <span>Poblacion</span>
-                            @foreach ($towns as $town)
-                                @if ($town->id == $event_element->town_id)
-                                    {{$town->name}}
-                                @endif
-                            @endforeach                    
-                        </li>
                         <li><span>Price</span>{{$event_element->price}}</li>
                         <li><span>Date</span>{{$event_element->start_date }} to {{$event_element->end_date}}</li>
                         <li><span>Time</span>{{$event_element->start_time }} to {{$event_element->end_time}}</li>
@@ -94,7 +87,7 @@
     </div>
 
     <div class="table-pagination">
-    <span>{{trans_choice("admin/pagination.total", 1 , ["count" => 1])}}</span>
+    <span>{{trans_choice("admin/pagination.total", 4 , ["count" => 4])}}</span>
     </div>
 @endsection
 
@@ -135,16 +128,6 @@
                 </div>
                 <div class="form-element">
                     <div class="form-element-label">
-                        <label for="address">Dirección</label>
-                    </div>
-                    <div class="form-element-input">
-                        <input type="text" name="address" value="{{$event->address ?? ''}}">
-                    </div>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-element">
-                    <div class="form-element-label">
                         <label for="end_time">Población</label>
                     </div>
                     <div class="form-element-input">
@@ -154,6 +137,16 @@
                                     <option value="{{$town->id}}" {{ $town->id == $event->town_id ? 'selected' : ''}}>{{$town->name}}</option>
                                 @endforeach
                         </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-element">
+                    <div class="form-element-label">
+                        <label for="address">Dirección</label>
+                    </div>
+                    <div class="form-element-input">
+                        <input type="text" name="address" value="{{$event->address ?? ''}}">
                     </div>
                 </div>
                 <div class="form-element">
@@ -216,7 +209,7 @@
                                 <label for="title-{{$language->label}}">Título</label>
                             </div>
                             <div class="form-element-input">
-                                <input type="text" name="locale['title.{{$language->label}}']" value="locale['title.{{$language->label}}']">
+                                <input type="text" name="locale['title.{{$language->label}}']" value="{{$event['title.'.$language->label] ?? ''}}">
                             </div>
                         </div>
                     </div>
@@ -226,7 +219,7 @@
                                 <label for="description-{{$language->label}}">Descripción</label>
                             </div>
                             <div class="form-element-input">
-                                <textarea name="locale['description.{{$language->label}}']" text="locale['description.{{$language->label}}']"></textarea>
+                                <textarea name="locale['description.{{$language->label}}']">{{$event['description.'.$language->label] ?? ''}}</textarea>
                             </div>
                         </div>
                     </div>

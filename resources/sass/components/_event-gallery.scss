@@ -1,0 +1,22 @@
+.upcoming-events {
+    display: flex;
+    width: 100%;
+    padding: 1rem;
+}
+
+.event {
+    width: 350px;
+    border: 2px hsl(0, 0%, 100%) solid;
+}
+
+.events-container {
+    display: flex;
+    flex: wrap;
+    gap: 2rem;
+}
+
+.image {
+    height: 150px;
+    width: 300px;
+    background-color: hsl(0, 0%, 100%);
+}

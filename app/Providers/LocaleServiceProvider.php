@@ -16,7 +16,7 @@ class LocaleServiceProvider extends ServiceProvider
     {
         $this->app->singleton(LocaleService::class, function($app) {
             return new LocaleService(new Locale());
-        })
+        });
     }
 
     /**

@@ -19,10 +19,12 @@ class EventController extends Controller
     try{
 
       $events = $this->event
+        ->with('town')
         ->orderBy('created_at', 'desc')
         ->paginate(10);
 
       $view = View::make('admin.events.index')
+      ->with('total', count($events))
       ->with('event', $this->event)
       ->with('events', $events);
 
@@ -75,9 +77,13 @@ class EventController extends Controller
 
       $data = $request->validated();
 
-      $this->event->updateOrCreate([
+      $event = $this->event->updateOrCreate([
         'id' => $request->input('id')
       ], $data);
+
+      if(request('locale')){
+        $locale = $this->localeService->store(request('locale'), $event->id);
+      }
 
       $events = $this->event
       ->orderBy('created_at', 'desc')
@@ -105,15 +111,13 @@ class EventController extends Controller
         'message' => Debugbar::info($e->getMessage())
       ], 500);
     }
-
-	if(request('locale')){
-		$locale = $this->localeService->store(request('locale'), $event->id);
-	}
   }
 
   public function edit(Event $event)
   {
     try{
+
+      // $event = $this->localeService->parseLocales($event);
 
       $events = $this->event
       ->orderBy('created_at', 'desc')
@@ -135,6 +139,7 @@ class EventController extends Controller
       return $view;
     }
     catch(\Exception $e){
+    
       return response()->json([
         'message' => \Lang::get('admin/notification.error'),
       ], 500);
